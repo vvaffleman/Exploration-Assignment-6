@@ -1,0 +1,25 @@
+<div class = "container form-horizontal">
+  <div class = "jumbotron col-lg-8 col-lg-offset-2">
+    <h1 class = "text-center">Create New Game</h1>
+
+    <hr>
+
+    <form role = "form" action = "/game/create" method = "POST" class = "form-horizontal form-signin">
+      <div class = "form-group">
+        <div class = "col-sm-offset-3 col-sm-6">
+          <label for = "name">Game Name</label>
+          <input type = "text" class = "form-control" placeholder = "Game Name" name = "name">
+        </div>
+      </div>
+
+      <div class = "form-group">
+        <div class = "col-sm-offset-3 col-sm-6">
+          <input type = "submit" class = "btn btn-lg btn-primary btn-block" value = "Create">
+          <input type = "hidden" name = "host" value = "<%= session.User.username %>">
+          <input type = "hidden" name = "numberOfPlayers" value = "1">
+          <input type = "hidden" name = "_csrf" value = "<%= _csrf %>">
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

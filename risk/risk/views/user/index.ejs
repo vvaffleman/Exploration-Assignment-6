@@ -1,0 +1,47 @@
+<div class = "container">
+  <div class = "jumbotron">
+    <h2>User Admin</h2>
+
+    <table class = "table">
+      <tr>
+        <th></th>
+        <th>ID</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Username</th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+
+      <% _.each(users, function(user) { %>
+        <tr data-id="<%= user.id %>" data-model="user">
+          <% if(user.online) { %>
+            <td><img src = "/images/online.png" width = "30px" height = "30px"></td>
+          <% } else { %>
+            <td><img src = "/images/offline.png" width = "30px" height = "30px"></td>
+          <% } %>
+          <td><%- user.id %></td>
+          <td><%- user.firstName %></td>
+          <td><%- user.lastName %></td>
+          <td><%- user.username %></td>
+          <% if(user.admin) { %>
+            <td><img src = "/images/admin.png" width = "30px" height = "30px"></td>
+          <% } else { %>
+            <td><img src = "/images/user.png" width = "30px" height = "30px"></td>
+          <% } %>
+          <td><a href = "/user/profile/<%= user.id %>" class = "btn btn-sm btn-primary">Show</td>
+          <td><a href = "/user/profile/<%= user.id %>" class = "btn btn-sm btn-warning">Edit</td>
+          <td>
+            <form action = "/user/delete/<%= user.id %>" method = "POST">
+              <input type = "hidden" name = "_method" value = "delete">
+              <input type = "hidden" name = "_csrf" value = "<%= _csrf %>">
+              <input type = "submit" class = "btn btn-sm btn-danger" value = "Delete">
+            </form>
+          </td>
+        </tr>
+      <% }) %>
+    </table>
+  </div>
+</div>
