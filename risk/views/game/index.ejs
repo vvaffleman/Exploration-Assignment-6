@@ -1,0 +1,35 @@
+<div class = "container">
+  <div class = "jumbotron">
+    <h2>Risk</h2>
+
+    <table class = "table">
+      <tr>
+        <td><a href = "/game/new" class = "btn btn-sm btn-warning">Create Game</td>
+      </tr>
+
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Host</th>
+        <th>Number of Players</th>
+        <th></th>
+        <th></th>
+      </tr>
+
+      <% _.each(games, function(game) { %>
+        <tr data-id="<%= game.id %>" data-model="game">
+          <td><%- game.id %></td>
+          <td><%- game.name %></td>
+          <td><%- game.host %></td>
+          <td><%- game.numberOfPlayers %></td>
+          <% if(session.User.username != game.host) { %>
+            <td><a href = "/game/join/<%= game.id %>" class = "btn btn-sm btn-primary">Join Game</td>
+          <% } %>
+          <% if(session.User.admin || session.User.username == game.host) { %>
+            <td><a href = "/game/delete/<%= game.id %>" class = "btn btn-sm btn-danger">Delete</td>
+          <% } %>
+        </tr>
+      <% }) %>
+    </table>
+  </div>
+</div>
